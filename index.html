@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Pomodoro Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <main class="arene-de-productivite">
+        <h1>Pomodoro Timer</h1>
+
+        <h2 id="oracle-du-destin">Travail</h2>
+
+        <div class="cercle-progression">
+            
+            <svg width="300" height="300">
+                <circle class="cercle-fond" cx="150" cy="150" r="125"></circle>
+                <circle class="cercle-remplissage" cx="150" cy="150" r="125"></circle>
+            </svg>
+
+            <div id="boite-pivot-animal">
+                <img src="./images/husky.png" alt="Mascotte" class="animal-mascotte">
+            </div>
+
+            <div id="sablier-infernal" class="texte-au-centre">25:00</div>
+        </div>
+
+        <div class="configuration-temps">
+            <div class="bloc-input">
+                <label for="input-travail">Travail (min) :</label>
+                <input type="number" id="input-travail" value="25" min="1" max="60">
+            </div>
+            <div class="bloc-input">
+                <label for="input-pause">Pause (min) :</label>
+                <input type="number" id="input-pause" value="5" min="1" max="60">
+            </div>
+        </div>
+
+        <div class="panneau-de-controle-mental">
+            <button id="btn-action">Start</button>
+            <button id="btn-amnesie-totale">Reset</button>
+        </div>
+
+        <p id="tableau-de-chasse">
+            <span id="texte-sessions">0 session(s)</span>
+            <span id="conteneur-os"></span>
+        </p>
+
+        <div class="choix-decor">
+            <label for="select-fond">Décor : </label>
+            <select id="select-fond">
+                <option value="nuit">Nuit</option>
+                <option value="jour">Jour</option>
+                <option value="crépuscule">Crépuscule</option>
+            </select>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
