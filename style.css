@@ -28,12 +28,48 @@ body {
 
 /* TITRES */
 
+.titre-couleur {
+    color: var(--accent-color);
+    transition: color 0.5s ease;
+}
+
 h1 {
     font-size: 1.2rem;
     margin-bottom: 10px;
 }
 h2 {
     font-size: 1rem;
+}
+
+/* SELECTEUR DE MODE */
+
+.selecteur-mode {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 5px;
+    border-radius: 20px;
+    width: fit-content;
+    margin: 0 auto 20px auto;
+}
+
+.selecteur-mode button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 0.6rem;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.selecteur-mode button.actif {
+    background: var(--accent-color);
+    box-shadow: 0 0 10px var(--accent-color);
+    color: #1e1e1e;
 }
 
 /* COMPTEUR */

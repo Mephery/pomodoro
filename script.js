@@ -2,7 +2,8 @@
 // LE GRAND CASTING DE MON DOM 
 // ==============================
 const affichageTemps = document.getElementById('sablier-infernal');
-const affichageMode = document.getElementById('oracle-du-destin');
+const btnModeTravail = document.getElementById('btn-mode-travail');
+const btnModePause = document.getElementById('btn-mode-pause');
 const btnAction = document.getElementById('btn-action');
 const btnReset = document.getElementById('btn-amnesie-totale');
 const texteSessions = document.getElementById('texte-sessions');
@@ -54,7 +55,6 @@ function mettreAJourAffichage() {
     const secAffichees = secondes < 10 ? '0' + secondes : secondes;
 
     affichageTemps.textContent = `${minAffichees}:${secAffichees}`;
-    affichageMode.textContent = modeActuel;
 
     mettreAJourProgression();
 }
@@ -83,6 +83,37 @@ function faireTicTac() {
 // ==========================
 // LES BOUTONS D'ACTION 
 // ==========================
+
+// Choisir son mode manuellement
+function forcerMode(nouveauMode) {
+    // Si on clique sur le mode dans lequel on est déjà, on ne fait rien
+    if (modeActuel === nouveauMode) return;
+
+    clearInterval(timerSillonne);
+    estEnMarche = false;
+    affichageTemps.classList.remove('en-pulsation');
+    btnAction.textContent = "Start";
+
+    modeActuel = nouveauMode;
+
+    if (modeActuel === "Travail") {
+        document.body.classList.remove('mode-pause');
+        btnModeTravail.classList.add('actif');
+        btnModePause.classList.remove('actif');
+        minutes = dureeTravail;
+    } else {
+        document.body.classList.add('mode-pause');
+        btnModePause.classList.add('actif');
+        btnModeTravail.classList.remove('actif');
+        minutes = dureePause;
+    }
+
+    secondes = 0;
+    mettreAJourAffichage();
+}
+
+btnModeTravail.addEventListener('click', function() { forcerMode("Travail"); });
+btnModePause.addEventListener('click', function() { forcerMode("Pause"); });
 
 // J'ai choisi le même bouton pour start et pause, comme sur la vidéo qui était sur discord en exemple
 btnAction.addEventListener('click', function() {
@@ -155,8 +186,6 @@ function basculerDeMode() {
         });
     }
 
-    document.body.classList.toggle('mode-pause');
-
     // On recharge le barillet avec les bonnes munitions selon le mode
     if (modeActuel === "Travail") {
         modeActuel = "Pause";
@@ -164,9 +193,15 @@ function basculerDeMode() {
         nombreDeSessions++;
         texteSessions.textContent = `${nombreDeSessions} session(s)`;
         mettreAJourOs();
+        document.body.classList.add('mode-pause');
+        btnModePause.classList.add('actif');
+        btnModeTravail.classList.remove('actif');
     } else {
         modeActuel = "Travail";
         minutes = dureeTravail;
+        document.body.classList.remove('mode-pause');
+        btnModeTravail.classList.add('actif');
+        btnModePause.classList.remove('actif');
     }
     
     secondes = 0;
